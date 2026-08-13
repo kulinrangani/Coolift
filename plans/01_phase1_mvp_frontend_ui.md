@@ -1,64 +1,95 @@
-# Phase 1 Plan — MVP Frontend UI & Navigation
+# Phase 1 Plan — MVP Frontend UI & Design System Integration
 
-*Focus: Fast mobile-first layout, bottom navigation, Home Screen, Workout Screen set logging, and prefilled previous values.*
+*Focus: COOLIFT Midnight Design System, Tailwind theme tokens, logo assets, mobile navigation shell, Home Screen, and Workout Screen set logging.*
 
 ---
 
 ## 🎯 Phase Goal
-Build a responsive, highly performant mobile web interface optimized for one-handed phone usage (360px–430px). The user should be able to launch the app, see today's workout, start a session, log sets, and see target/previous performance values.
+Implement the mobile-first **COOLIFT** frontend interface strictly aligned with the **COOLIFT UI / UX Design System**. The UI must feature the Midnight theme (`#070B14`), integrated logo assets, 44px minimum touch targets, large typography for workout metrics, and zero layout shift.
+
+---
+
+## 🎨 Theme Tokens & Tailwind Configuration
+
+### 1. Midnight Theme Tokens (Default)
+Configure `tailwind.config.js` or CSS variables with COOLIFT color tokens:
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        coolift: {
+          bg: '#070B14',          // App background
+          surface: '#0F1726',     // Cards / Sections
+          elevated: '#151F32',    // Inputs / Elevated cards
+          primary: '#2688FF',     // Primary actions / Active states
+          secondary: '#06B6D4',   // Secondary accent
+          accent: '#8B5CF6',      // Highlights
+          success: '#10B981',     // Completed sets / success
+          warning: '#F59E0B',     // Attention
+          error: '#EF4444',       // Errors
+          text: '#F8FAFC',        // Main text
+          muted: '#94A3B8',       // Supporting text
+        }
+      }
+    }
+  }
+}
+```
+
+### 2. Multi-Theme Token Architecture
+Implement CSS root variables so the theme can be dynamically swapped in Settings between:
+* 🌙 **Midnight (Default):** `#070B14` (Primary Accent: `#2688FF` / `#06B6D4`)
+* 🌌 **Aurora:** `#0B0814` (Primary Accent: `#8B5CF6` / `#EC4899`)
+* 🌲 **Forest:** `#07110D` (Primary Accent: `#10B981` / `#14B8A6`)
+* 🌅 **Sunset:** `#140B07` (Primary Accent: `#F97316` / `#EF4444`)
 
 ---
 
 ## 📋 Task Breakdown
 
-### 1. Project Infrastructure & Dependencies
-* Verify and configure `frontend/` with Vite, React 18, TypeScript, Tailwind CSS, Lucide Icons, and Zustand.
-* Define dark-mode color theme tailored for gym usage (high contrast, crisp typography).
+### 1. Logo & Header Component (`Header.tsx`)
+* Embed `01_logo_primary.png` for top navigation bar / desktop view and `02_logo_icon.png` for compact header views and PWA app icons.
+* Display user avatar & greeting (*"Welcome back, Kulin"*).
 
-### 2. Core Layout & Navigation
-* Create `BottomNav.tsx` with 5 navigation items:
-  * 🏠 **Home:** Today's workout & weekly status.
-  * 🏋️ **Workout:** Active workout logging screen.
-  * 📜 **History:** Past sessions log.
+### 2. Mobile Navigation Shell (`AppShell.tsx` & `BottomNavigation.tsx`)
+* **`AppShell`:** Safe area padding, maximum width container centered on tablet/desktop viewports (max-w-md), dark theme background (`bg-coolift-bg`).
+* **`BottomNavigation`:** 5 mobile navigation items with 44px+ touch targets:
+  * 🏠 **Home:** Today's workout & quick stats.
+  * 🏋️ **Workout:** Active workout set logging.
+  * 📜 **History:** Past completed sessions calendar.
   * 📊 **Progress:** Body weight & volume metrics.
-  * ⚙️ **Settings:** User preferences & account setup.
-* Implement mobile layout wrapper with sticky bottom bar and safe area paddings.
+  * ⚙️ **Settings:** Theme selector & sync controls.
 
-### 3. Home Screen (`HomeView.tsx`)
-* **Today's Workout Card:** Displays current plan day (e.g., *Day 1 — Chest + Triceps*), estimated duration (~45 min), and total exercise count (5 exercises).
-* **CTA Button:** Large, high-visibility `START WORKOUT` button leading straight to `WorkoutView`.
-* **Weekly Overview Bar:** 7-day visual pills showing completed vs. upcoming workout days.
+### 3. Home Screen (`HomeView.tsx`) — Design Spec Section 7
+* **Today's Workout Card (`WorkoutCard.tsx`):**
+  * Day Title: `Day 1 — Chest + Triceps`
+  * Subtext: `5 Exercises • ~45 min`
+  * Action Button: Prominent `START WORKOUT` button in `#2688FF` primary accent.
+* **Weekly Overview Bar:** 7-day pill row showing completed, planned, and rest states.
+* **Quick Stats Cards (`StatCard.tsx`):**
+  * Current Weight (e.g. `74.5 kg`)
+  * Workouts Completed This Week (e.g. `3 / 6`)
+  * Current Streak (e.g. `4 weeks 🔥`)
 
-### 4. Default Workout Plan Data (`mockPlanData.ts`)
-Seed the initial 6-day workout split into frontend constants:
-* **Day 1 (Chest + Triceps):** Bench Press, Incline DB Press, Machine Chest Press, Rope Pushdown, Overhead Cable Extension.
-* **Day 2 (Back + Biceps):** Lat Pulldown, T-Bar Row, Bent-Over Row, Close-Grip Pulldown, Incline DB Curl, Cable Hammer Curl, EZ-Bar Curl.
-* **Day 3 (Shoulders + Legs):** Leg Press, Hamstring Curl, Leg Extension, Calf Raise, Shoulder Press, Lateral Raise, Rear Delt Fly.
-* **Day 4 (Upper — Chest + Back):** Bench Press, Machine Fly, Flat DB Press, Lat Pulldown, T-Bar Row, Bent-Over Row.
-* **Day 5 (Lower — Legs + Core):** Leg Press, Squats, Leg Extension, Hamstring Curl, Calf Raise, Plank, Cable Crunch, Leg Raise.
-* **Day 6 (Arms + Shoulders):** Incline DB Curl, Preacher Curl, Rope Hammer Curl, Rope Pushdown, Overhead Cable Extension, Lateral Raise, Shoulder Press, Face Pull.
-
-### 5. Workout Logging Screen (`WorkoutView.tsx`) — Highest Priority
-* **Exercise Cards:**
-  * Exercise Title & Target Sets/Reps (e.g., `Barbell Bench Press — Target 3 × 6–10`).
-  * "Last time" reference row (e.g., `Last time: 60 kg × 10, 60 kg × 9, 60 kg × 8`).
-* **Interactive Set Rows:**
-  * Set Number pill.
-  * Large, touch-friendly numeric inputs for **Weight (kg)** and **Reps**.
-  * Quick `+` / `-` incremental buttons for one-thumb weight adjustments.
-  * Completion Checkmark toggle button (changes color on set completion).
-  * `+ Add Set` and `Delete Set` actions.
-* **Finish Workout Button:** Prominent bottom button to complete and summarize session duration and total volume.
-
-### 6. Mock History & Settings Screens
-* Basic list view of mock completed workouts in `HistoryView.tsx`.
-* Basic user profile options in `SettingsView.tsx`.
+### 4. Workout Screen (`WorkoutView.tsx`) — Design Spec Section 8
+* **Exercise Card (`ExerciseCard.tsx`):**
+  * Exercise name header (e.g., `Barbell Bench Press`).
+  * Target sets & reps badge (e.g., `Target: 3 × 6–10`).
+  * Last time reference banner: `Last time: 60 kg × 10, 60 kg × 9, 60 kg × 8`.
+* **Set Row Component (`SetRow.tsx`):**
+  * Set Number indicator (`Set 1`, `Set 2`, `Set 3`).
+  * Prefilled Weight & Reps inputs using previous performance.
+  * Large touch-friendly numeric inputs for Weight and Reps with quick adjustment buttons (`+` / `-`).
+  * Set Completion Toggle Button: Turns vibrant green (`#10B981`) upon checkmark toggle.
+* **Bottom Workout Action Bar:**
+  * Add exercise button, Cancel workout option, and `FINISH WORKOUT` CTA.
 
 ---
 
 ## 🧪 Acceptance Criteria
-1. Navigation transitions smoothly between Home, Workout, History, Progress, and Settings without layout shifts.
-2. Home screen clearly shows today's workout plan and starting button.
-3. Workout screen pre-fills suggested weight/reps from previous sessions.
-4. Input fields are easy to tap and edit on mobile screen widths (360-430px).
-5. Completing a set visually updates its completion state immediately.
+1. UI exactingly reflects COOLIFT Midnight color palette (`#070B14` bg, `#0F1726` surface, `#2688FF` primary).
+2. Header displays COOLIFT logos (`01_logo_primary.png` / `02_logo_icon.png`).
+3. Touch targets for all buttons and inputs are 44px or larger.
+4. Set checkmark toggle provides instant visual success feedback (`#10B981`).
+5. Layout is perfectly responsive on mobile screens (360px – 430px).
