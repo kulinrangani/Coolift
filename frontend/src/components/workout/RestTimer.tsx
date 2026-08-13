@@ -48,7 +48,7 @@ export const RestTimer: React.FC<RestTimerProps> = ({
         <span className="text-xs font-extrabold uppercase tracking-widest text-[#2688FF]">
           REST TIMER
         </span>
-        <div className="text-4xl font-black tracking-tight text-white my-0.5 font-mono">
+        <div className="text-4xl font-black tracking-tight text-white my-0.5 font-sans tabular-nums">
           {formatTime(secondsLeft)}
         </div>
       </div>

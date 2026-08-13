@@ -18,7 +18,7 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 active:scale-[0.98] select-none touch-manipulation min-h-[44px] shadow-sm';
+  const baseStyles = 'inline-flex items-center justify-center font-sans font-bold tracking-tight rounded-xl transition-all duration-200 active:scale-[0.98] select-none touch-manipulation min-h-[44px] shadow-sm';
   
   const sizeStyles = {
     sm: 'px-3 py-2 text-sm gap-1.5',

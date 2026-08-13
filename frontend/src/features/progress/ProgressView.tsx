@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { UserProfile } from '../../lib/types';
 import { StatCard } from '../../components/common/StatCard';
 import { PrimaryButton } from '../../components/common/PrimaryButton';
-import { bodyWeightSchema } from '../../lib/validation';
+import { validateBodyWeight } from '../../lib/validation';
 import { TrophyIcon, ActivityIcon, PlusIcon, FlameIcon } from '../../components/icons/Icons';
 
 interface ProgressViewProps {
@@ -22,13 +22,10 @@ export const ProgressView: React.FC<ProgressViewProps> = ({ user }) => {
   const handleLogWeight = (e: React.FormEvent) => {
     e.preventDefault();
     const val = parseFloat(weightInput);
-    const result = bodyWeightSchema.safeParse({
-      weight: val,
-      date: new Date().toISOString(),
-    });
+    const validation = validateBodyWeight(isNaN(val) ? '' : val, new Date().toISOString());
 
-    if (!result.success) {
-      setErrorMsg(result.error.errors[0]?.message || 'Invalid weight value');
+    if (!validation.isValid) {
+      setErrorMsg(validation.error || 'Invalid weight value');
       return;
     }
 
@@ -89,7 +86,7 @@ export const ProgressView: React.FC<ProgressViewProps> = ({ user }) => {
             </div>
             <div className="w-32">
               <PrimaryButton type="submit" size="sm" icon={<PlusIcon size={16} />}>
-                LOG
+                Log Entry
               </PrimaryButton>
             </div>
           </div>

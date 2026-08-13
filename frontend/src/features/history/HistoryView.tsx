@@ -21,7 +21,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
         <EmptyState
           title="No Completed Workouts Yet"
           description="Your logged sessions will appear here with full exercise and set breakdowns."
-          actionText="LOG YOUR FIRST WORKOUT"
+          actionText="Log Your First Workout"
           onAction={() => onStartNewWorkout(1)}
         />
       </div>

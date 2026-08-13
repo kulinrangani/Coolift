@@ -50,11 +50,11 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({
       <div className="relative z-10">
         {isCurrentSessionActive && onResumeWorkout ? (
           <PrimaryButton variant="secondary" icon={<PlayIcon size={18} />} onClick={onResumeWorkout}>
-            RESUME WORKOUT IN PROGRESS
+            Resume Workout in Progress
           </PrimaryButton>
         ) : (
           <PrimaryButton icon={<PlayIcon size={18} />} onClick={() => onStartWorkout(plan.dayNumber)}>
-            START WORKOUT
+            Start Workout
           </PrimaryButton>
         )}
       </div>

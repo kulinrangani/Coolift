@@ -35,7 +35,7 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
         <EmptyState
           title="No Active Workout"
           description="Start today's session to begin logging sets, weights, and reps."
-          actionText="START TODAY'S WORKOUT"
+          actionText="Start Today's Workout"
           onAction={() => onStartNewWorkout(1)}
         />
       </div>
@@ -78,14 +78,14 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
       <div className="bg-[#0F1726] border border-[#2688FF]/30 rounded-2xl p-4 flex items-center justify-between sticky top-16 z-20 shadow-xl backdrop-blur-md">
         <div>
           <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#2688FF]">
-            WORKOUT IN PROGRESS
+            Workout in Progress
           </span>
           <h3 className="text-lg font-black text-white">{activeSession.workoutTitle}</h3>
         </div>
 
         <div className="flex items-center gap-1.5 bg-[#151F32] px-3 py-1.5 rounded-xl border border-[#151F32]">
           <ClockIcon size={16} color="#06B6D4" />
-          <span className="text-sm font-extrabold font-mono text-white">
+          <span className="text-sm font-extrabold font-sans tabular-nums text-white">
             {formatElapsed(elapsedSeconds)}
           </span>
         </div>
@@ -118,7 +118,7 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
       {/* Bottom Action Controls */}
       <div className="flex flex-col gap-2 mt-4">
         <PrimaryButton icon={<CheckIcon size={20} />} onClick={onFinishWorkout}>
-          FINISH & SAVE WORKOUT
+          Finish & Save Workout
         </PrimaryButton>
         <PrimaryButton variant="ghost" icon={<XIcon size={18} />} onClick={onCancelWorkout}>
           Cancel Workout

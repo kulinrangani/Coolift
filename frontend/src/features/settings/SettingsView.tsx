@@ -73,7 +73,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ user }) => {
           onClick={handleForceSync}
           disabled={isSyncing}
         >
-          {isSyncing ? 'SYNCING LOCAL DATA...' : syncSuccess ? 'ALL WORKOUTS BACKED UP!' : 'FORCE SYNC NOW'}
+          {isSyncing ? 'Syncing Local Data...' : syncSuccess ? 'All Workouts Backed Up!' : 'Force Sync Now'}
         </PrimaryButton>
       </div>
     </div>
