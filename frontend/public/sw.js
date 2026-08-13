@@ -1,14 +1,18 @@
-const CACHE_NAME = 'coolift-cache-v1';
+const CACHE_NAME = 'coolift-cache-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/favicon.svg',
-  '/COOLIFT_Design_Assets/01_logo_primary.svg',
-  '/COOLIFT_Design_Assets/02_logo_icon.svg',
+  '/apple-touch-icon.png',
+  '/COOLIFT_Design_Assets/01_logo_primary.png',
+  '/COOLIFT_Design_Assets/02_logo_icon.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-maskable.png',
 ];
 
-// Service Worker Installation: Pre-cache core shell & offline assets
+// Service Worker Installation: Pre-cache core shell & PNG logo icons
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -36,14 +40,12 @@ self.addEventListener('activate', (event) => {
 
 // Fetch Interceptor: Stale-While-Revalidate Strategy for offline support
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)
         .then((networkResponse) => {
-          // If valid response, update cache in background
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
@@ -53,13 +55,11 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // Network failed, return offline fallback index.html if navigating
           if (event.request.mode === 'navigate') {
             return caches.match('/index.html') || caches.match('/');
           }
         });
 
-      // Return cached response immediately if available, else wait for network
       return cachedResponse || fetchPromise;
     })
   );
