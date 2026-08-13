@@ -2,13 +2,40 @@ import { useState, useEffect } from 'react';
 import type { NavTab, WorkoutSession, SetEntry, ExerciseSession, UserProfile } from '../lib/types';
 import { WORKOUT_PLANS, PREVIOUS_VALUES, MOCK_PAST_SESSIONS, INITIAL_USER } from '../lib/mockData';
 
+const COMPLETED_SESSIONS_STORAGE_KEY = 'coolift_completed_sessions';
+
 export function useWorkoutStore() {
   const [activeTab, setActiveTab] = useState<NavTab>('home');
   const [userProfile] = useState<UserProfile>(INITIAL_USER);
   const [currentDayIndex, setCurrentDayIndex] = useState<number>(1); // Day 1 default
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
-  const [completedSessions, setCompletedSessions] = useState<WorkoutSession[]>(MOCK_PAST_SESSIONS);
+  
+  // Load completed sessions from localStorage or default to MOCK_PAST_SESSIONS
+  const [completedSessions, setCompletedSessions] = useState<WorkoutSession[]>(() => {
+    try {
+      const saved = localStorage.getItem(COMPLETED_SESSIONS_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse completed sessions from localStorage:', e);
+    }
+    return MOCK_PAST_SESSIONS;
+  });
+
   const [elapsedSeconds, setElapsedSeconds] = useState<number>(0);
+
+  // Sync completedSessions to localStorage whenever updated
+  useEffect(() => {
+    try {
+      localStorage.setItem(COMPLETED_SESSIONS_STORAGE_KEY, JSON.stringify(completedSessions));
+    } catch (e) {
+      console.warn('Failed to save completed sessions to localStorage:', e);
+    }
+  }, [completedSessions]);
 
   // Active workout timer tick
   useEffect(() => {

@@ -7,7 +7,13 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ user }) => {
   return (
-    <header className="bg-[#070B14]/90 backdrop-blur-md sticky top-0 z-30 border-b border-[#151F32] px-4 py-3 flex items-center justify-between">
+    <header
+      className="bg-[#070B14]/90 backdrop-blur-md sticky top-0 z-30 border-b border-[#151F32] px-4 flex items-center justify-between"
+      style={{
+        paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)',
+        paddingBottom: '12px',
+      }}
+    >
       {/* Brand Logo & Name */}
       <div className="flex items-center gap-2.5">
         <img

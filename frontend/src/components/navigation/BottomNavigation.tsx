@@ -22,7 +22,13 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto px-3 py-2 bg-[#0F1726]/95 backdrop-blur-xl border-t border-[#151F32] shadow-[0_-8px_30px_rgba(0,0,0,0.6)] flex items-center justify-around font-sans">
+    <nav
+      className="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto px-3 bg-[#0F1726]/95 backdrop-blur-xl border-t border-[#151F32] shadow-[0_-8px_30px_rgba(0,0,0,0.6)] flex items-center justify-around font-sans"
+      style={{
+        paddingTop: '8px',
+        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 8px)',
+      }}
+    >
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
         const isWorkoutTab = tab.id === 'workout';
