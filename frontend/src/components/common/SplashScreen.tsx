@@ -68,35 +68,17 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         <img
           src="/COOLIFT_Design_Assets/01_logo_primary.svg"
           alt="COOLIFT — Lift. Track. Evolve."
-          style={{ height: '256px', objectFit: 'contain' }}
+          style={{ height: '56px', objectFit: 'contain' }}
           onError={(e) => {
             // Fallback text logo if SVG fails
             const el = e.target as HTMLImageElement;
             el.style.display = 'none';
           }}
         />
-      </div>
-
-      {/* Animated loading bar */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 48px)',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '120px',
-          height: '3px',
-          backgroundColor: 'rgba(38,136,255,0.15)',
-          borderRadius: '99px',
-          overflow: 'hidden',
-          animation: 'splashTextIn 0.5s ease-out 0.9s forwards',
-          opacity: 0,
-        }}
-      >
         <div
           style={{
-            height: '100%',
             width: '0%',
+            height: '3px',
             background: 'linear-gradient(90deg, #2688FF, #06B6D4)',
             borderRadius: '99px',
             animation: 'splashProgress 1.8s ease-out 0.9s forwards',
