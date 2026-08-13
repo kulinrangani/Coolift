@@ -1,0 +1,30 @@
+{
+  "name": "COOLIFT — Lift. Track. Evolve.",
+  "short_name": "COOLIFT",
+  "description": "Local-first offline gym workout, rep, and body progress tracking web application.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070B14",
+  "theme_color": "#070B14",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/COOLIFT_Design_Assets/02_logo_icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/COOLIFT_Design_Assets/02_logo_icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

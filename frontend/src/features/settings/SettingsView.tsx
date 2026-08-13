@@ -60,6 +60,19 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ user }) => {
         </p>
       </div>
 
+      {/* PWA & Offline Support Card */}
+      <div className="bg-[#0F1726] border border-[#151F32] rounded-2xl p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h4 className="text-sm font-extrabold text-[#F8FAFC]">PWA & Offline Mode</h4>
+          <span className="text-xs font-bold text-[#10B981] bg-[#10B981]/15 px-2.5 py-1 rounded-md flex items-center gap-1">
+            <CheckIcon size={12} /> Ready Offline
+          </span>
+        </div>
+        <p className="text-xs text-[#94A3B8]">
+          COOLIFT is configured as a Progressive Web App (PWA). Add it to your home screen to launch in full-screen app mode and log workouts 100% offline.
+        </p>
+      </div>
+
       {/* Cloud Sync Controls */}
       <div className="bg-[#0F1726] border border-[#151F32] rounded-2xl p-4">
         <h4 className="text-sm font-extrabold text-[#F8FAFC] mb-1">Local Storage & Cloud Sync</h4>
