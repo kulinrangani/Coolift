@@ -1,41 +1,39 @@
-# Phase 1 Plan — MVP Frontend UI & Design System Integration
+# Phase 1 Plan — MVP Frontend UI & Component Architecture
 
-*Focus: COOLIFT Midnight Design System, Tailwind Midnight theme tokens, logo assets, mobile navigation shell, Home Screen, and Workout Screen set logging.*
+*Focus: COOLIFT Midnight Design System, reusable component library, Zod frontend validation, logo assets, mobile navigation shell, Home Screen, and Workout Screen set logging.*
 
 ---
 
 ## 🎯 Phase Goal
-Implement the mobile-first **COOLIFT** frontend interface strictly aligned with the **COOLIFT UI / UX Design System** using exclusively the **Midnight Theme** (`#070B14`). The UI must feature integrated logo assets, 44px minimum touch targets, large typography for workout metrics, and zero layout shift.
+Implement the mobile-first **COOLIFT** frontend interface strictly aligned with the **COOLIFT UI / UX Design System** using the **Midnight Theme** (`#070B14`). The codebase must adhere to clean code principles, modular component reusability, strict TypeScript typing, and input validation.
 
 ---
 
-## 🎨 Theme Tokens & Tailwind Configuration
+## 🧩 Reusable Component Library Architecture (`src/components/`)
 
-### 1. Midnight Theme Tokens (Exclusive Theme)
-Configure `tailwind.config.js` with COOLIFT Midnight color tokens:
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        coolift: {
-          bg: '#070B14',          // App background
-          surface: '#0F1726',     // Cards / Sections
-          elevated: '#151F32',    // Inputs / Elevated cards
-          primary: '#2688FF',     // Primary actions / Active states
-          secondary: '#06B6D4',   // Secondary accent
-          accent: '#8B5CF6',      // Highlights
-          success: '#10B981',     // Completed sets / success
-          warning: '#F59E0B',     // Attention
-          error: '#EF4444',       // Errors
-          text: '#F8FAFC',        // Main text
-          muted: '#94A3B8',       // Supporting text
-        }
-      }
-    }
-  }
-}
-```
+### 1. Common Atomic Components (`src/components/common/`)
+* **`PrimaryButton.tsx`:** Standardized CTA button with large touch target ($\ge 44\text{px}$), loading state spinner, active scale effect, and variant styling (primary `#2688FF`, secondary `#06B6D4`, outline, danger).
+* **`Input.tsx`:** High-contrast numeric and text input field with error messaging label, focus ring, and clear button.
+* **`StatCard.tsx`:** Dashboard metric card showing label, large value, icon, and trend indicator.
+* **`BottomSheet.tsx`:** Touch-draggable mobile bottom modal for quick secondary actions.
+* **`EmptyState.tsx`:** Clean illustration state with text description and call-to-action button.
+
+### 2. Workout Components (`src/components/workout/`)
+* **`WorkoutCard.tsx`:** Reusable summary card for today's workout split, duration, exercise count, and start button.
+* **`ExerciseCard.tsx`:** Exercise header container with target sets/reps, last session performance summary, and form note dropdown.
+* **`SetRow.tsx`:** Interactive set logging row featuring set index, prefilled suggested values, numeric weight/reps input, quick `+` / `-` adjustment controls, and completion checkbox toggle (`#10B981`).
+
+---
+
+## 🛡️ Frontend Input Validation (`src/lib/validation.ts`)
+
+Integrate `zod` and `react-hook-form` validation for all user inputs:
+* **Set Entry Validation:**
+  * `weight`: Required number, min $0.25\text{ kg}$, max $500\text{ kg}$.
+  * `reps`: Required integer, min $1$, max $100$.
+* **Body Weight Validation:**
+  * `weight`: Required number, min $20.0\text{ kg}$, max $300.0\text{ kg}$.
+* Inline error indicators preventing submission of invalid numeric values.
 
 ---
 
@@ -82,7 +80,7 @@ module.exports = {
 
 ## 🧪 Acceptance Criteria
 1. UI exactingly reflects COOLIFT Midnight color palette (`#070B14` bg, `#0F1726` surface, `#2688FF` primary).
-2. Header displays COOLIFT logos (`01_logo_primary.png` / `02_logo_icon.png`).
-3. Touch targets for all buttons and inputs are 44px or larger.
+2. Clean modular components (`PrimaryButton`, `StatCard`, `ExerciseCard`, `SetRow`) are used throughout without code duplication.
+3. Invalid weights or reps (e.g. negative numbers or text) are caught and flagged by Zod validation schemas.
 4. Set checkmark toggle provides instant visual success feedback (`#10B981`).
 5. Layout is perfectly responsive on mobile screens (360px – 430px).
