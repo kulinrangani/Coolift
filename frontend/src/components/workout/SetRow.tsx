@@ -53,7 +53,7 @@ export const SetRow: React.FC<SetRowProps> = ({
           >
             <MinusIcon size={14} />
           </button>
-          <div className="relative flex-1 min-w-[64px]">
+          <div className="flex-1 min-w-[56px]">
             <input
               type="number"
               step="0.5"
@@ -65,9 +65,6 @@ export const SetRow: React.FC<SetRowProps> = ({
               placeholder="0"
               className="w-full bg-[#0F1726] text-white font-extrabold text-base text-center py-1.5 px-1 rounded-lg border border-[#151F32] focus:border-[#2688FF] focus:outline-none transition-colors"
             />
-            <span className="absolute right-1.5 top-2 text-[10px] font-semibold text-[#94A3B8] pointer-events-none">
-              kg
-            </span>
           </div>
           <button
             type="button"
@@ -87,7 +84,7 @@ export const SetRow: React.FC<SetRowProps> = ({
           >
             <MinusIcon size={14} />
           </button>
-          <div className="relative flex-1 min-w-[56px]">
+          <div className="flex-1 min-w-[56px]">
             <input
               type="number"
               step="1"
@@ -99,9 +96,6 @@ export const SetRow: React.FC<SetRowProps> = ({
               placeholder="0"
               className="w-full bg-[#0F1726] text-white font-extrabold text-base text-center py-1.5 px-1 rounded-lg border border-[#151F32] focus:border-[#2688FF] focus:outline-none transition-colors"
             />
-            <span className="absolute right-1.5 top-2 text-[10px] font-semibold text-[#94A3B8] pointer-events-none">
-              reps
-            </span>
           </div>
           <button
             type="button"

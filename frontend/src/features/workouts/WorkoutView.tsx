@@ -72,6 +72,15 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
     });
   });
 
+  const [allExpanded, setAllExpanded] = useState<boolean>(true);
+  const [toggleKey, setToggleKey] = useState<number>(0);
+
+  const handleToggleAll = () => {
+    const nextState = !allExpanded;
+    setAllExpanded(nextState);
+    setToggleKey((prev) => prev + 1);
+  };
+
   return (
     <div className="p-4 flex flex-col gap-4 animate-fade-in pb-28">
       {/* Active Workout Timer Bar */}
@@ -104,11 +113,26 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
         </div>
       </div>
 
+      {/* Exercise List Header & Accordion Control */}
+      <div className="flex items-center justify-between mt-1 px-1">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+          Exercises ({activeSession.exercises.length})
+        </h4>
+        <button
+          type="button"
+          onClick={handleToggleAll}
+          className="text-xs font-bold text-[#2688FF] hover:text-[#3b93ff] bg-[#2688FF]/10 px-2.5 py-1 rounded-lg transition-colors border border-[#2688FF]/20 active:scale-95"
+        >
+          {allExpanded ? 'Collapse All' : 'Expand All'}
+        </button>
+      </div>
+
       {/* List of Exercise Cards */}
       {activeSession.exercises.map((exercise) => (
         <ExerciseCard
-          key={exercise.exerciseId}
+          key={`${exercise.exerciseId}-${toggleKey}`}
           exercise={exercise}
+          defaultExpanded={allExpanded}
           onUpdateSet={(setNum, field, val) => onUpdateSet(exercise.exerciseId, setNum, field, val)}
           onToggleSetComplete={(setNum) => handleToggleSet(exercise.exerciseId, setNum)}
           onAddSet={() => onAddSet(exercise.exerciseId)}
