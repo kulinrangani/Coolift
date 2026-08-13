@@ -1,18 +1,18 @@
 # Phase 1 Plan — MVP Frontend UI & Design System Integration
 
-*Focus: COOLIFT Midnight Design System, Tailwind theme tokens, logo assets, mobile navigation shell, Home Screen, and Workout Screen set logging.*
+*Focus: COOLIFT Midnight Design System, Tailwind Midnight theme tokens, logo assets, mobile navigation shell, Home Screen, and Workout Screen set logging.*
 
 ---
 
 ## 🎯 Phase Goal
-Implement the mobile-first **COOLIFT** frontend interface strictly aligned with the **COOLIFT UI / UX Design System**. The UI must feature the Midnight theme (`#070B14`), integrated logo assets, 44px minimum touch targets, large typography for workout metrics, and zero layout shift.
+Implement the mobile-first **COOLIFT** frontend interface strictly aligned with the **COOLIFT UI / UX Design System** using exclusively the **Midnight Theme** (`#070B14`). The UI must feature integrated logo assets, 44px minimum touch targets, large typography for workout metrics, and zero layout shift.
 
 ---
 
 ## 🎨 Theme Tokens & Tailwind Configuration
 
-### 1. Midnight Theme Tokens (Default)
-Configure `tailwind.config.js` or CSS variables with COOLIFT color tokens:
+### 1. Midnight Theme Tokens (Exclusive Theme)
+Configure `tailwind.config.js` with COOLIFT Midnight color tokens:
 ```javascript
 module.exports = {
   theme: {
@@ -37,13 +37,6 @@ module.exports = {
 }
 ```
 
-### 2. Multi-Theme Token Architecture
-Implement CSS root variables so the theme can be dynamically swapped in Settings between:
-* 🌙 **Midnight (Default):** `#070B14` (Primary Accent: `#2688FF` / `#06B6D4`)
-* 🌌 **Aurora:** `#0B0814` (Primary Accent: `#8B5CF6` / `#EC4899`)
-* 🌲 **Forest:** `#07110D` (Primary Accent: `#10B981` / `#14B8A6`)
-* 🌅 **Sunset:** `#140B07` (Primary Accent: `#F97316` / `#EF4444`)
-
 ---
 
 ## 📋 Task Breakdown
@@ -53,13 +46,13 @@ Implement CSS root variables so the theme can be dynamically swapped in Settings
 * Display user avatar & greeting (*"Welcome back, Kulin"*).
 
 ### 2. Mobile Navigation Shell (`AppShell.tsx` & `BottomNavigation.tsx`)
-* **`AppShell`:** Safe area padding, maximum width container centered on tablet/desktop viewports (max-w-md), dark theme background (`bg-coolift-bg`).
+* **`AppShell`:** Safe area padding, maximum width container centered on tablet/desktop viewports (max-w-md), Midnight dark theme background (`bg-coolift-bg`).
 * **`BottomNavigation`:** 5 mobile navigation items with 44px+ touch targets:
   * 🏠 **Home:** Today's workout & quick stats.
   * 🏋️ **Workout:** Active workout set logging.
   * 📜 **History:** Past completed sessions calendar.
   * 📊 **Progress:** Body weight & volume metrics.
-  * ⚙️ **Settings:** Theme selector & sync controls.
+  * ⚙️ **Settings:** Profile preferences & sync controls.
 
 ### 3. Home Screen (`HomeView.tsx`) — Design Spec Section 7
 * **Today's Workout Card (`WorkoutCard.tsx`):**

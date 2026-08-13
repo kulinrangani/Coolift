@@ -6,7 +6,7 @@
 
 ## 📌 Executive Summary
 
-This master plan outlines the step-by-step architectural breakdown for developing **COOLIFT**, a mobile-first, local-first workout tracker built according to the **COOLIFT UI / UX & Design System**. The app features a dark fitness-tech aesthetic, zero-latency offline performance via Dexie (IndexedDB), an automated rest timer, and seamless cloud synchronization with MongoDB Atlas.
+This master plan outlines the step-by-step architectural breakdown for developing **COOLIFT**, a mobile-first, local-first workout tracker built according to the **COOLIFT UI / UX & Design System**. The app features a single dedicated dark **Midnight** fitness-tech aesthetic, zero-latency offline performance via Dexie (IndexedDB), an automated rest timer, and seamless cloud synchronization with MongoDB Atlas.
 
 ---
 
@@ -16,9 +16,19 @@ This master plan outlines the step-by-step architectural breakdown for developin
 * **Tagline:** *Lift. Track. Evolve.*
 * **Primary Logo:** `01_logo_primary.png` (Full logo with wordmark)
 * **App Icon:** `02_logo_icon.png` (Stylized C + dumbbell symbol)
-* **Default Theme:** **Midnight** (`#070B14` App background, `#0F1726` Surface, `#151F32` Elevated, `#2688FF` Primary Accent, `#06B6D4` Secondary Accent, `#10B981` Success).
-* **Supported Themes:** Midnight (Default), Aurora, Forest, Sunset.
-* **Typography:** Inter sans-serif with extra large, high-contrast workout numbers (20-32px).
+* **Dedicated Theme:** **Midnight Theme Only**
+  * App Background: `#070B14`
+  * Card / Section Surface: `#0F1726`
+  * Inputs / Elevated Surface: `#151F32`
+  * Primary Accent: `#2688FF`
+  * Secondary Accent: `#06B6D4`
+  * Highlight Accent: `#8B5CF6`
+  * Success / Completed Sets: `#10B981`
+  * Attention / Warning: `#F59E0B`
+  * Error: `#EF4444`
+  * Main Text: `#F8FAFC`
+  * Supporting Text: `#94A3B8`
+* **Typography:** Inter sans-serif with extra large, high-contrast workout numbers (20–32px).
 * **Mobile UX Rule:** Minimum 44px touch targets, bottom-heavy thumb-friendly actions, and no dense desktop tables.
 
 ---
@@ -52,8 +62,8 @@ src/
 │   ├── exercises/        # Exercise library & details
 │   ├── history/          # Completed workout list & date detail modal
 │   ├── progress/         # Weight tracker & strength analytics
-│   └── settings/         # Theme picker (Midnight/Aurora/Forest/Sunset) & sync control
-├── store/                # Zustand stores (useWorkoutStore, useThemeStore)
+│   └── settings/         # Profile preferences & sync control
+├── store/                # Zustand store (useWorkoutStore)
 ├── db/                   # Dexie database definitions (GymTrackerDB)
 ├── services/             # API client & Sync Engine
 ├── hooks/                # Custom React hooks
@@ -66,5 +76,5 @@ src/
 ## 🎯 Implementation Rules
 
 1. **Mobile-First Priority:** Optimized for 360px–430px mobile viewports.
-2. **Strict Design System Fidelity:** Use Midnight theme tokens (`#070B14`, `#0F1726`, `#151F32`, `#2688FF`, `#10B981`) and COOLIFT logos.
+2. **Dedicated Midnight Theme:** Standardized on Midnight theme tokens (`#070B14`, `#0F1726`, `#151F32`, `#2688FF`, `#10B981`) without multi-theme switcher complexity.
 3. **Core UX Loop:** `Open → Today's Workout → Log Set → Rest → Next Set → Complete → Sync`.
