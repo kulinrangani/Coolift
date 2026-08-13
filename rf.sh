@@ -1,0 +1,1 @@
+git pull && cd frontend && npm run build
