@@ -195,6 +195,15 @@ export function useWorkoutStore() {
     setActiveTab('home');
   };
 
+  const clearHistory = () => {
+    setCompletedSessions([]);
+    try {
+      localStorage.removeItem(COMPLETED_SESSIONS_STORAGE_KEY);
+    } catch (e) {
+      console.warn('Failed to clear history from localStorage:', e);
+    }
+  };
+
   return {
     activeTab,
     setActiveTab,
@@ -211,5 +220,6 @@ export function useWorkoutStore() {
     removeSetFromExercise,
     finishWorkout,
     cancelWorkout,
+    clearHistory,
   };
 }

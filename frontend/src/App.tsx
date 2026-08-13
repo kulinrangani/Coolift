@@ -22,6 +22,7 @@ export function App() {
     addSetToExercise,
     finishWorkout,
     cancelWorkout,
+    clearHistory,
   } = useWorkoutStore();
 
   return (
@@ -66,7 +67,7 @@ export function App() {
         )}
 
         {activeTab === 'settings' && (
-          <SettingsView user={userProfile} />
+          <SettingsView user={userProfile} onClearHistory={clearHistory} />
         )}
       </main>
 
