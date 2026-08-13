@@ -1,5 +1,5 @@
 import React from 'react';
-import type { WorkoutDayPlan, WorkoutSession, UserProfile } from '../../lib/types';
+import type { WorkoutSession, UserProfile } from '../../lib/types';
 import { WORKOUT_PLANS } from '../../lib/mockData';
 import { WorkoutCard } from '../../components/workout/WorkoutCard';
 import { StatCard } from '../../components/common/StatCard';

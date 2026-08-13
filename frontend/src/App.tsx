@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppShell } from './components/navigation/AppShell';
 import { Header } from './components/navigation/Header';
 import { BottomNavigation } from './components/navigation/BottomNavigation';
