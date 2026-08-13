@@ -84,7 +84,7 @@ export const WorkoutView: React.FC<WorkoutViewProps> = ({
   return (
     <div className="p-4 flex flex-col gap-4 animate-fade-in pb-28">
       {/* Active Workout Timer Bar */}
-      <div className="bg-[#0F1726] border border-[#2688FF]/30 rounded-2xl p-4 flex items-center justify-between sticky top-16 z-20 shadow-xl backdrop-blur-md">
+      <div className="bg-[#0F1726] border border-[#2688FF]/30 rounded-2xl p-4 flex items-center justify-between sticky top-[56px] z-20 shadow-xl backdrop-blur-md">
         <div>
           <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#2688FF]">
             Workout in Progress
