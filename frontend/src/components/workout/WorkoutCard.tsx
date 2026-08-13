@@ -19,14 +19,14 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({
   return (
     <div className="bg-[#0F1726] border border-[#151F32] rounded-3xl p-5 shadow-xl relative overflow-hidden my-4 transition-all duration-200 hover:border-[#2688FF]/40">
       {/* Background Accent Glow */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#2688FF]/10 rounded-full blur-2xl -z-0 pointer-events-none" />
+      <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2688FF]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header Tag */}
       <div className="flex items-center justify-between mb-3 relative z-10">
         <span className="text-xs font-bold uppercase tracking-wider text-[#2688FF] bg-[#2688FF]/15 px-3 py-1 rounded-full">
           Today's Workout
         </span>
-        <div className="flex items-center gap-1.5 text-xs text-[#94A3B8] font-medium">
+        <div className="flex items-center gap-1.5 text-xs text-[#94A3B8] font-semibold bg-[#151F32] px-2.5 py-1 rounded-full border border-[#151F32]">
           <ClockIcon size={14} color="#94A3B8" />
           <span>~{plan.estimatedMinutes} min</span>
         </div>

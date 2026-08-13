@@ -71,24 +71,19 @@ export const ProgressView: React.FC<ProgressViewProps> = ({ user }) => {
         <h3 className="text-sm font-extrabold text-[#F8FAFC] mb-3">Log Body Weight Today</h3>
         <form onSubmit={handleLogWeight} className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <div className="relative flex-1">
+            <div className="flex-1">
               <input
                 type="number"
                 step="0.1"
                 value={weightInput}
                 onChange={(e) => setWeightInput(e.target.value)}
-                placeholder="Enter weight in kg"
-                className="w-full bg-[#151F32] text-white font-bold text-base py-2.5 px-3 rounded-xl border border-[#151F32] focus:border-[#2688FF] focus:outline-none"
+                placeholder="Weight in kg (e.g. 74.5)"
+                className="w-full h-[44px] bg-[#151F32] text-white font-extrabold text-base py-2 px-3 rounded-xl border border-[#151F32] focus:border-[#2688FF] focus:outline-none transition-colors"
               />
-              <span className="absolute right-3 top-3 text-xs font-semibold text-[#94A3B8]">
-                kg
-              </span>
             </div>
-            <div className="w-32">
-              <PrimaryButton type="submit" size="sm" icon={<PlusIcon size={16} />}>
-                Log Entry
-              </PrimaryButton>
-            </div>
+            <PrimaryButton type="submit" size="sm" fullWidth={false} icon={<PlusIcon size={16} />} className="h-[44px] px-4 shrink-0 whitespace-nowrap">
+              Log Entry
+            </PrimaryButton>
           </div>
           {errorMsg && <p className="text-xs text-[#EF4444] font-semibold">{errorMsg}</p>}
         </form>
