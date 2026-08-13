@@ -27,13 +27,13 @@ Implement the mobile-first **COOLIFT** frontend interface strictly aligned with 
 
 ## 🛡️ Frontend Input Validation (`src/lib/validation.ts`)
 
-Integrate `zod` and `react-hook-form` validation for all user inputs:
-* **Set Entry Validation:**
+Integrate `yup` validation schemas for all user inputs:
+* **Set Entry Validation (`setRowSchema`):**
   * `weight`: Required number, min $0.25\text{ kg}$, max $500\text{ kg}$.
   * `reps`: Required integer, min $1$, max $100$.
-* **Body Weight Validation:**
+* **Body Weight Validation (`bodyWeightSchema`):**
   * `weight`: Required number, min $20.0\text{ kg}$, max $300.0\text{ kg}$.
-* Inline error indicators preventing submission of invalid numeric values.
+* Synchronous validation helpers (`validateSetRow`, `validateBodyWeight`) returning structured error feedback.
 
 ---
 

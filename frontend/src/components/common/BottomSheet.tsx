@@ -1,0 +1,55 @@
+import React, { useEffect } from 'react';
+import { XIcon } from '../icons/Icons';
+
+interface BottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  children: React.ReactNode;
+}
+
+export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, title, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+        onClick={onClose}
+      />
+
+      {/* Sheet Content */}
+      <div className="relative w-full max-w-md bg-[#0F1726] border-t border-[#151F32] rounded-t-3xl p-6 shadow-2xl z-10 animate-slide-up max-h-[85vh] overflow-y-auto">
+        {/* Drag Handle */}
+        <div className="w-12 h-1.5 bg-[#151F32] rounded-full mx-auto mb-4" />
+
+        {/* Header */}
+        {title && (
+          <div className="flex items-center justify-between mb-4 border-b border-[#151F32] pb-3">
+            <h3 className="text-lg font-bold text-[#F8FAFC]">{title}</h3>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-full bg-[#151F32] flex items-center justify-center text-[#94A3B8] hover:text-white transition-colors"
+            >
+              <XIcon size={18} />
+            </button>
+          </div>
+        )}
+
+        {children}
+      </div>
+    </div>
+  );
+};
