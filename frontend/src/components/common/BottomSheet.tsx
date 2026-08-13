@@ -51,7 +51,14 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, title
         </div>
 
         {/* Scrollable Children Body */}
-        <div className="flex-1 py-5 overflow-y-auto px-6 pb-20">
+        <div
+          className="flex-1 overflow-y-auto px-6 py-5 pb-24 scroll-container"
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-y',
+            overscrollBehaviorY: 'contain',
+          }}
+        >
           {children}
         </div>
       </div>

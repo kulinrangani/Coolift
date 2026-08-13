@@ -58,6 +58,14 @@ html, body {
   scrollbar-color: #1E2C44 transparent;
 }
 
+/* Touch & Scroll Utilities */
+.scroll-container {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: contain !important;
+}
+
 /* Ensure buttons, inputs, selects inherit consistent font and have reset backgrounds */
 button, input, select, textarea {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
