@@ -56,24 +56,6 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         }}
       />
 
-      {/* Logo icon */}
-      <div
-        style={{
-          animation: 'splashLogoIn 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards',
-          opacity: 0,
-        }}
-      >
-        <img
-          src="/COOLIFT_Design_Assets/02_logo_icon.png"
-          alt="COOLIFT"
-          style={{
-            width: '96px',
-            height: '96px',
-            objectFit: 'contain',
-            filter: 'drop-shadow(0 0 24px rgba(38,136,255,0.5))',
-          }}
-        />
-      </div>
 
       {/* Primary wordmark */}
       <div
@@ -86,44 +68,14 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         <img
           src="/COOLIFT_Design_Assets/01_logo_primary.svg"
           alt="COOLIFT — Lift. Track. Evolve."
-          style={{ height: '32px', objectFit: 'contain' }}
+          style={{ height: '256px', objectFit: 'contain' }}
           onError={(e) => {
             // Fallback text logo if SVG fails
             const el = e.target as HTMLImageElement;
             el.style.display = 'none';
           }}
         />
-        {/* Fallback wordmark rendered in CSS */}
-        <div
-          style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
-            fontWeight: 900,
-            fontSize: '28px',
-            letterSpacing: '-0.5px',
-            color: '#F8FAFC',
-            textAlign: 'center',
-          }}
-        >
-          COO<span style={{ color: '#2688FF' }}>LIFT</span>
-        </div>
       </div>
-
-      {/* Tagline */}
-      <p
-        style={{
-          marginTop: '8px',
-          fontFamily: "'Inter', system-ui, sans-serif",
-          fontWeight: 600,
-          fontSize: '12px',
-          letterSpacing: '3px',
-          textTransform: 'uppercase',
-          color: '#94A3B8',
-          animation: 'splashTextIn 0.6s ease-out 0.7s forwards',
-          opacity: 0,
-        }}
-      >
-        Lift. Track. Evolve.
-      </p>
 
       {/* Animated loading bar */}
       <div
