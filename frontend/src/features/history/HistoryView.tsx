@@ -104,32 +104,68 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
         onClose={() => setSelectedSession(null)}
         title={selectedSession?.workoutTitle || 'Workout Session Detail'}
       >
-        {selectedSession && (
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between text-xs text-[#94A3B8] bg-[#151F32] p-3 rounded-xl">
-              <span>Date: <strong className="text-white">{formatDate(selectedSession.startedAt)}</strong></span>
-              <span>Duration: <strong className="text-white">{formatDuration(selectedSession.durationSeconds)}</strong></span>
-            </div>
+        {selectedSession && (() => {
+          let sessionTotalWeight = 0;
+          let sessionTotalSets = 0;
+          selectedSession.exercises.forEach((ex) => {
+            ex.sets.forEach((s) => {
+              sessionTotalSets += 1;
+              sessionTotalWeight += (typeof s.weight === 'number' ? s.weight : 0) * (typeof s.reps === 'number' ? s.reps : 0);
+            });
+          });
 
-            <div className="flex flex-col gap-3">
-              {selectedSession.exercises.map((ex) => (
-                <div key={ex.exerciseId} className="bg-[#070B14] p-3 rounded-xl border border-[#151F32]">
-                  <h5 className="text-sm font-bold text-white mb-2">{ex.exerciseName}</h5>
-                  <div className="flex flex-wrap gap-1.5">
-                    {ex.sets.map((s) => (
-                      <span
-                        key={s.setNumber}
-                        className="text-xs bg-[#151F32] text-[#F8FAFC] px-2.5 py-1 rounded-lg font-medium border border-[#151F32]"
-                      >
-                        S{s.setNumber}: {s.weight}kg × {s.reps}
-                      </span>
-                    ))}
-                  </div>
+          return (
+            <div className="flex flex-col gap-4 pb-6">
+              {/* Session Overview Stats Cards */}
+              <div className="grid grid-cols-3 gap-2 bg-[#151F32]/80 border border-[#151F32] p-2.5 rounded-2xl">
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Date</span>
+                  <span className="text-xs font-black text-white mt-0.5">{formatDate(selectedSession.startedAt)}</span>
                 </div>
-              ))}
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Duration</span>
+                  <span className="text-xs font-black text-[#06B6D4] mt-0.5">{formatDuration(selectedSession.durationSeconds)}</span>
+                </div>
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Volume</span>
+                  <span className="text-xs font-black text-[#10B981] mt-0.5">{sessionTotalWeight.toLocaleString()} kg</span>
+                </div>
+              </div>
+
+              {/* Exercise Breakdown Cards */}
+              <div className="flex flex-col gap-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] px-1">
+                  Exercises ({selectedSession.exercises.length}) • {sessionTotalSets} Sets
+                </h4>
+
+                {selectedSession.exercises.map((ex) => (
+                  <div key={ex.exerciseId} className="bg-[#151F32]/60 border border-[#151F32] p-3.5 rounded-2xl flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between">
+                      <h5 className="text-sm font-extrabold text-[#F8FAFC]">{ex.exerciseName}</h5>
+                      <span className="text-[10px] font-bold text-[#2688FF] bg-[#2688FF]/15 px-2.5 py-0.5 rounded-full uppercase">
+                        {ex.sets.length} sets
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      {ex.sets.map((s) => (
+                        <div
+                          key={s.setNumber}
+                          className="flex items-center justify-between bg-[#0F1726] border border-[#151F32] px-3 py-2 rounded-xl text-xs"
+                        >
+                          <span className="font-extrabold text-[#94A3B8]">Set {s.setNumber}</span>
+                          <span className="font-extrabold text-[#F8FAFC]">
+                            {s.weight} <span className="text-[#94A3B8] text-[10px] font-semibold">kg</span> × {s.reps}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
       </BottomSheet>
     </div>
   );
