@@ -23,15 +23,15 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, title
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-end justify-center" style={{ zIndex: 9999 }}>
-      {/* Backdrop */}
+    <div className="fixed inset-x-0 top-[56px] bottom-0 z-40 flex items-end justify-center pointer-events-none">
+      {/* Backdrop below top header */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
+        className="fixed inset-x-0 top-[56px] bottom-0 bg-black/75 backdrop-blur-sm transition-opacity pointer-events-auto"
         onClick={onClose}
       />
 
-      {/* Sheet Content Card */}
-      <div className="relative w-full max-w-md bg-[#0F1726] border-t border-[#2688FF]/40 rounded-t-3xl p-5 shadow-2xl z-10 animate-slide-up max-h-[80vh] flex flex-col">
+      {/* Compact Sheet Content Card */}
+      <div className="pointer-events-auto relative w-full max-w-md bg-[#0F1726] border-t border-[#2688FF]/40 rounded-t-3xl p-5 shadow-2xl z-10 animate-slide-up max-h-[65vh] flex flex-col">
         {/* Drag Handle */}
         <div className="w-12 h-1.5 bg-[#151F32] rounded-full mx-auto mb-3 shrink-0" />
 
