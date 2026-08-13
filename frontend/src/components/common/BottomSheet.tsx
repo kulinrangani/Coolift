@@ -23,21 +23,21 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, title
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center">
+    <div className="fixed inset-0 flex items-end justify-center" style={{ zIndex: 100 }}>
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
 
-      {/* Sheet Content */}
-      <div className="relative w-full max-w-md bg-[#0F1726] border-t border-[#2688FF]/30 rounded-t-3xl p-5 pb-14 shadow-2xl z-10 animate-slide-up max-h-[85vh] overflow-y-auto">
+      {/* Sheet Content Card */}
+      <div className="relative w-full max-w-md bg-[#0F1726] border-t border-[#2688FF]/40 rounded-t-3xl p-5 shadow-2xl z-10 animate-slide-up max-h-[85vh] flex flex-col">
         {/* Drag Handle */}
-        <div className="w-12 h-1.5 bg-[#151F32] rounded-full mx-auto mb-4" />
+        <div className="w-12 h-1.5 bg-[#151F32] rounded-full mx-auto mb-3 shrink-0" />
 
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between mb-4 border-b border-[#151F32] pb-3">
+          <div className="flex items-center justify-between mb-3 border-b border-[#151F32] pb-3 shrink-0">
             <h3 className="text-lg font-black text-[#F8FAFC] tracking-tight">{title}</h3>
             <button
               type="button"
@@ -49,7 +49,10 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, title
           </div>
         )}
 
-        {children}
+        {/* Scrollable Children Container */}
+        <div className="flex-1 overflow-y-auto pr-1 pb-24">
+          {children}
+        </div>
       </div>
     </div>
   );
