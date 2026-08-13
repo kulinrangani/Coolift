@@ -116,19 +116,19 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 
           return (
             <div className="flex flex-col gap-4 pb-12">
-              {/* Session Overview Stats Cards */}
-              <div className="grid grid-cols-3 gap-2 bg-[#151F32]/80 border border-[#151F32] p-3 rounded-2xl">
-                <div className="flex flex-col items-center justify-center p-2.5 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+              {/* Session Overview Stats Cards in 1 Single Row */}
+              <div className="grid grid-cols-3 gap-2 bg-[#151F32]/80 border border-[#151F32] p-2 rounded-2xl">
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60 text-center min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Date</span>
-                  <span className="text-xs font-black text-white mt-0.5">{formatDate(selectedSession.startedAt)}</span>
+                  <span className="text-xs font-black text-white mt-0.5 truncate w-full">{formatDate(selectedSession.startedAt)}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-2.5 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60 text-center min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Duration</span>
-                  <span className="text-xs font-black text-[#06B6D4] mt-0.5">{formatDuration(selectedSession.durationSeconds)}</span>
+                  <span className="text-xs font-black text-[#06B6D4] mt-0.5 truncate w-full">{formatDuration(selectedSession.durationSeconds)}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-2.5 bg-[#0F1726] rounded-xl border border-[#151F32]/60">
+                <div className="flex flex-col items-center justify-center p-2 bg-[#0F1726] rounded-xl border border-[#151F32]/60 text-center min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Volume</span>
-                  <span className="text-xs font-black text-[#10B981] mt-0.5">{sessionTotalWeight.toLocaleString()} kg</span>
+                  <span className="text-xs font-black text-[#10B981] mt-0.5 truncate w-full">{sessionTotalWeight.toLocaleString()} kg</span>
                 </div>
               </div>
 
